@@ -19,7 +19,11 @@ RUN apk --no-cache add curl bash fontconfig ttf-dejavu
 ENV JENKINS_USER jenkins
 ENV JENKINS_VERSION 2.70
 ENV JENKINS_HOME /opt/jenkins
-ENV JAVA_OPTS -Djava.awt.headless=true -Dhttp.proxyHost=proxyva.casden.fr -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxyva.casden.fr -Dhttps.proxyPort=8080
+
+# With proxy
+# ENV JAVA_OPTS -Djava.awt.headless=true -Dhttp.proxyHost=proxyva.mydomain.com -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxyva.mydomain.com -Dhttps.proxyPort=8080
+
+ENV JAVA_OPTS -Djava.awt.headless=true
 RUN mkdir /opt && adduser -Dh $JENKINS_HOME $JENKINS_USER && cd $JENKINS_HOME && curl -sL -O http://mirrors.jenkins.io/war/$JENKINS_VERSION/jenkins.war
 
 USER $JENKINS_USER
